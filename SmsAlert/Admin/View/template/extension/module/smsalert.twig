@@ -1,0 +1,271 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        {% if error_warning is not empty %}
+
+            {% for error in error_warning %}
+                <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error.error }}
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                </div>
+            {% endfor %}
+
+        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+            </div>
+            <div class="s-w">
+
+
+                {% if smsalert_test_result is not empty %}
+                    <div class="alert alert-warning smsalert-alert smsalert-alert-success alert-dismissible show" role="alert">
+                        The test is successful! <a
+                                href="#"
+                                type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </a>
+                    </div>
+                {% endif %}
+
+                <div class="s-h">
+                    <img src="{{ smsalert_logo }}" style="height: 100px" alt="SMSAlert">
+                </div>
+                <div class="s-b">
+                    <div class="group">
+                        <label><p>Steps</p></label>
+                        <ul>
+                            <li><span class="tag">1</span>
+                                <p>Create an account on : <span><a href="https://smsalert.mobi">SMSAlert</a></span>
+                                </p></li>
+                            <li><span class="tag">2</span>
+                                <p>Get API key from : <a
+                                            href="https://smsalert.mobi/settings">SMS Alert settings page</a></p></li>
+                            <li><span class="tag">3</span>
+                                <p>Configure settings below</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body s-w">
+                <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-first-module"
+                      class="form-horizontal">
+                    {% if smsalert_apiKey is not empty %}
+                        <div class="group">
+                            <label>{{ btn_test_text }}</label>
+                            <input type="text" name="smsalert_test_phone_number"
+                                   value="{{ smsalert_test_phone_number is not empty ?  smsalert_test_phone_number : '' }}"
+                                   placeholder="{{ btn_test_placeholder }}">
+                            <div class="description">
+                                <p>{{ btn_test_description }}</p>
+                            </div>
+                            <input type="submit" name="smsalert_test" value="{{ btn_test_send }}">
+                        </div>
+                    {% endif %}
+                    <div class="group">
+                        <div class="g">
+                            <label>{{ btn_activate_text }}</label>
+                            <input type="checkbox" name="smsalert_active"
+                                   value="true" {{ smsalert_active == true ?  'checked="checked"' : '' }}>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_username_text }}</label>
+                        <input type="text" name="smsalert_username" value="{{ smsalert_username ? smsalert_username : '' }}"
+                               placeholder="{{ btn_username_placeholder }}">
+                        <div class="description">
+                            <p>{{ btn_usernmae_description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_apiKey_text }}</label>
+                        <input type="text" name="smsalert_apiKey" value="{{ smsalert_apiKey ? smsalert_apiKey : '' }}"
+                               placeholder="{{ btn_apiKey_placeholder }}">
+                        <div class="description">
+                            <p>{{ btn_apiKey_description }}</p>
+                        </div>
+                    </div>
+
+
+                    <div class="group">
+                        <label>{{ btn_status_order_canceled }}</label>
+                        <input type="checkbox" name="smsalert_canceled_active"
+                               value="true" {{ smsalert_canceled_active == true ?  'checked="checked"' : '' }}>
+                        <textarea name="smsalert_canceled_message"
+                                  value="{{ smsalert_canceled_message == true ? smsalert_canceled_message : '' }}">{{ smsalert_canceled_message == true ?  smsalert_canceled_message : '' }}</textarea>
+                        <div class="description">
+                            <p>{{ btn_status_order_description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_status_order_canceled_reversal }}</label>
+                        <input type="checkbox" name="smsalert_canceled_reversal_active"
+                               value="true" {{ smsalert_canceled_reversal_active == true ?  'checked="checked"' : '' }}>
+                        <textarea name="smsalert_canceled_reversal_message"
+                                  value="{{ smsalert_canceled_reversal_message == true ?  smsalert_canceled_reversal_message : '' }}">{{ smsalert_canceled_reversal_message == true ?  smsalert_canceled_reversal_message : '' }}</textarea>
+                        <div class="description">
+                            <p>{{ btn_status_order_description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_status_order_chargebackd }}</label>
+                        <input type="checkbox" name="smsalert_chargeback_active"
+                               value="true" {{ smsalert_chargeback_active == true ?  'checked="checked"' : '' }}>
+                        <textarea name="smsalert_chargeback_message"
+                                  value="{{ smsalert_chargeback_message == true ?  smsalert_chargeback_message : '' }}">{{ smsalert_chargeback_message == true ?  smsalert_chargeback_message : '' }}</textarea>
+                        <div class="description">
+                            <p>{{ btn_status_order_description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_status_order_complete }}</label>
+                        <input type="checkbox" name="smsalert_complete_active"
+                               value="true" {{ smsalert_complete_active == true ?  'checked="checked"' : '' }}>
+                        <textarea name="smsalert_complete_message"
+                                  value="{{ smsalert_complete_message == true ?  smsalert_complete_message : '' }}">{{ smsalert_complete_message == true ?  smsalert_complete_message : '' }}</textarea>
+                        <div class="description">
+                            <p>{{ btn_status_order_description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_status_order_denied }}</label>
+                        <input type="checkbox" name="smsalert_denied_active"
+                               value="true" {{ smsalert_denied_active == true ?  'checked="checked"' : '' }}>
+                        <textarea name="smsalert_denied_message"
+                                  value="{{ smsalert_denied_message == true ?  smsalert_denied_message : '' }}">{{ smsalert_denied_message == true ?  smsalert_denied_message : '' }}</textarea>
+                        <div class="description">
+                            <p>{{ btn_status_order_description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_status_order_refunded }}</label>
+                        <input type="checkbox" name="smsalert_refunded_active"
+                               value="true" {{ smsalert_refunded_active == true ?  'checked="checked"' : '' }}>
+                        <textarea name="smsalert_refunded_message"
+                                  value="{{ smsalert_refunded_message == true ?  smsalert_refunded_message : '' }}">{{ smsalert_refunded_message == true ?  smsalert_refunded_message : '' }}</textarea>
+                        <div class="description">
+                            <p>{{ btn_status_order_description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_status_order_expired }}</label>
+                        <input type="checkbox" name="smsalert_expired_active"
+                               value="true" {{ smsalert_expired_active == true ?  'checked="checked"' : '' }}>
+                        <textarea name="smsalert_expired_message"
+                                  value="{{ smsalert_expired_message == true ?  smsalert_expired_message : '' }}">{{ smsalert_expired_message == true ?  smsalert_expired_message : '' }}</textarea>
+                        <div class="description">
+                            <p>{{ btn_status_order_description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_status_order_failed }}</label>
+                        <input type="checkbox" name="smsalert_failed_active"
+                               value="true" {{ smsalert_failed_active == true ?  'checked="checked"' : '' }}>
+                        <textarea name="smsalert_failed_message"
+                                  value="{{ smsalert_failed_message == true ?  smsalert_failed_message : '' }}">{{ smsalert_failed_message == true ?  smsalert_failed_message : '' }}</textarea>
+                        <div class="description">
+                            <p>{{ btn_status_order_description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_status_order_pending }}</label>
+                        <input type="checkbox" name="smsalert_pending_active"
+                               value="true" {{ smsalert_pending_active == true ?  'checked="checked"' : '' }}>
+                        <textarea name="smsalert_pending_message"
+                                  value="{{ smsalert_pending_message == true ?  smsalert_pending_message : '' }}">{{ smsalert_pending_message == true ?  smsalert_pending_message : '' }}</textarea>
+                        <div class="description">
+                            <p>{{ btn_status_order_description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_status_order_processed }}</label>
+                        <input type="checkbox" name="smsalert_processed_active"
+                               value="true" {{ smsalert_processed_active == true ?  'checked="checked"' : '' }}>
+                        <textarea name="smsalert_processed_message"
+                                  value="{{ smsalert_processed_message == true ?  smsalert_processed_message : '' }}">{{ smsalert_processed_message == true ?  smsalert_processed_message : '' }}</textarea>
+                        <div class="description">
+                            <p>{{ btn_status_order_description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_status_order_processing }}</label>
+                        <input type="checkbox" name="smsalert_processing_active"
+                               value="true" {{ smsalert_processing_active == true ?  'checked="checked"' : '' }}>
+                        <textarea name="smsalert_processing_message"
+                                  value="{{ smsalert_processing_message == true ?  smsalert_processing_message : '' }}">{{ smsalert_processing_message == true ?  smsalert_processing_message : '' }}</textarea>
+                        <div class="description">
+                            <p>{{ btn_status_order_description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_status_order_refunded }}</label>
+                        <input type="checkbox" name="smsalert_refunded_active"
+                               value="true" {{ smsalert_refunded_active == true ?  'checked="checked"' : '' }}>
+                        <textarea name="smsalert_refunded_message"
+                                  value="{{ smsalert_refunded_message == true ?  smsalert_refunded_message : '' }}">{{ smsalert_refunded_message == true ?  smsalert_refunded_message : '' }}</textarea>
+                        <div class="description">
+                            <p>{{ btn_status_order_description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_status_order_reversed }}</label>
+                        <input type="checkbox" name="smsalert_reversed_active"
+                               value="true" {{ smsalert_reversed_active == true ?  'checked="checked"' : '' }}>
+                        <textarea name="smsalert_reversed_message"
+                                  value="{{ smsalert_reversed_message == true ?  smsalert_reversed_message : '' }}">{{ smsalert_reversed_message == true ?  smsalert_reversed_message : '' }}</textarea>
+                        <div class="description">
+                            <p>{{ btn_status_order_description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_status_order_shipped }}</label>
+                        <input type="checkbox" name="smsalert_shipped_active"
+                               value="true" {{ smsalert_shipped_active == true ?  'checked="checked"' : '' }}>
+                        <textarea name="smsalert_shipped_message"
+                                  value="{{ smsalert_shipped_message == true ?  smsalert_shipped_message : '' }}">{{ smsalert_shipped_message == true ?  smsalert_shipped_message : '' }}</textarea>
+                        <div class="description">
+                            <p>{{ btn_status_order_description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label>{{ btn_status_order_voided }}</label>
+                        <input type="checkbox" name="smsalert_voided_active"
+                               value="true" {{ smsalert_voided_active == true ?  'checked="checked"' : '' }}>
+                        <textarea name="smsalert_voided_message"
+                                  value="{{ smsalert_voided_message == true ?  smsalert_voided_message : '' }}">{{ smsalert_voided_message == true ?  smsalert_voided_message : '' }}</textarea>
+                        <div class="description">
+                            <p>{{ btn_status_order_description }}</p>
+                        </div>
+                    </div>
+                    <input type="submit" name="smsalert_save_settings" value="{{ btn_token_save_all }}">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}

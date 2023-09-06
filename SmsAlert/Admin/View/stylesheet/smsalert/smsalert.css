@@ -1,0 +1,323 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+*{}
+.m-l-r
+{
+    margin-right: 35px !important;
+    margin-left: 20px !important;
+}
+.s-w,
+.s-w
+{
+    background: #fff;
+    border-radius: 5px;
+    padding: 0 40px 30px 40px !important;
+    display: block;
+}
+.s-w .s-h
+{
+    margin: 15px 0;
+    border-bottom: 1px solid #f1f1f1;
+    padding-bottom: 10px;
+}
+.s-w .s-h .s-t
+{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f1f1f1;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin: 10px 0 20px;
+    color: #000;
+    font-weight: 600;
+}
+.s-w .s-b
+{
+
+}
+.s-w .s-b label
+{
+    font-size: 15px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #169f85;
+}
+
+.s-w .s-b .group ul li
+{
+    margin: 10px 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #2a3f54;
+    font-weight: 700;
+    list-style: none;
+}
+.s-w .s-b .group ul li > p
+{
+    display: inline-block;
+}
+.s-w .s-b .group ul li span.tag
+{
+    background: #169f85;
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+    border-radius: 100px;
+    text-align: center;
+    color: #fff;
+    line-height: 17px;
+    font-size: 11px;
+    margin-right: 10px;
+}
+.s-w .s-b .group ul li a
+{
+    color: #169f85;
+    text-decoration: unset;
+}
+.s-w .group,
+.s-w .group
+{
+    border: 1px solid #f1f1f1;
+    padding: 15px 10px;
+    margin-top: 50px;
+}
+.s-w .group:first-child
+{
+    margin-top: 0;
+}
+
+.s-w .group input[type="checkbox"]
+{
+	margin-left: 20px;
+}
+
+.s-w .group .list
+{
+    margin: 10px 0;
+}
+.s-w .group .list span
+{
+    font-weight: 500;
+    font-size: 13px;
+    color: #2a3f54;
+    text-transform: uppercase;
+    position: relative;
+    top: 7px;
+}
+.s-w .group label,
+.s-w .group label
+{
+    text-transform: uppercase;
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-block;
+    cursor: unset;
+    text-align: center;
+    position: relative;
+}
+.s-w .group label p
+{
+    margin: 0;
+    padding: 0;
+}
+.s-w .group input[type="radio"],
+.s-w .group input[type="checkbox"]
+{
+	margin: 0 5px;
+    position: relative;
+    top: 10px;
+}
+.s-w .group input[type="checkbox"]
+{
+	position: relative;
+	top: 1px;
+	border-radius: 100px;
+	text-align: center;
+	cursor: pointer;
+	color: #fff;
+	box-shadow: 0 1px 5px #2a3f54;
+}
+.s-w .group textarea
+{
+    width: 100%;
+    height: 180px;
+    margin-top: 20px;
+    border: 1px solid #f1f1f1;
+    font-size: 16px;
+    color: #2a3f54;
+    font-weight: 600;
+    padding-top: 5px;
+}
+.s-w .group .description p,
+.s-w .group .description p
+{
+    padding: 0;
+    font-size: 14px;
+    color: #c0c0c0;
+    text-align: left;
+    margin: 10px 0 0 5px;
+}
+.s-w .group input[type="text"],
+.s-w .group input[type="text"]
+{
+    padding-left: 10px;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #169f85;
+    background-color: #fff;
+    background-image: none;
+    height: 50px;
+    box-shadow: unset;
+    display: block;
+    border-radius: 100px;
+    width: 100%;
+    transition: 0.2s border;
+    margin-top: 20px;
+    border: 1px solid #f1f1f1;
+    font-weight: 600;
+    outline: none;
+}
+.s-w input[type="submit"],
+.s-w input[type="submit"] {
+    background: linear-gradient(to bottom, #2a3f54 0%, #2a3f54 40%, #2a3f54 100%);
+    border: 1px solid #2a3f54;
+    padding: 10px 10px 11px 10px;
+    width: 10%;
+    color: #fff;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 20px;
+    border-radius: 100px;
+    text-transform: uppercase;
+    box-shadow: 0 1px 5px #2a3f54;
+    margin-top: 30px;
+}
+.s-w .group input[type="submit"]
+{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: inline-block;
+    font-size: 13px;
+    width: 300px;
+    padding: 7px 10px 7px 10px;
+}
+.s-w .group .list .group-radio
+{
+	margin-left: 3px;
+    margin-top: 9px;
+}
+body .alert.alert-warning.smsalert-alert
+{
+    color: #fff;
+    background-color: #2a3f54;
+    margin-top: 30px;
+    box-shadow: 0 1px 5px #2a3f54;
+    padding: 0;
+    border: 0 #fff0;
+    border-radius: 100px;
+}
+body .alert.alert-warning.smsalert-alert.smsalert-alert-success.alert-dismissible
+{
+    color: #fff;
+    background-color: #2a3f54;
+    margin-top: 30px;
+    box-shadow: 0 1px 5px #2a3f54;
+    padding: 20px;
+    border: 0 #fff0;
+    border-radius: 100px;
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 600;
+    width: 100%;
+    overflow: hidden;
+}
+body .alert.alert-warning.smsalert-alert.smsalert-alert-success.alert-dismissible .close span {
+    line-height: 16px;
+    padding: 0;
+    margin: 0;
+    display: block;
+    top: 0;
+    position: absolute;
+    right: 40px;
+}
+
+body .alert.alert-warning.smsalert-alert strong
+{
+    color: #fff;
+    height: 55px;
+    margin: 0;
+    display: inline-block;
+    line-height: 53px;
+    background: #169f85;
+    padding: 0 10px;
+    border-radius: 100px;
+    box-shadow: 0 1px 5px #169f85;
+    width: 200px;
+    text-align: center;
+}
+body .alert.alert-warning.smsalert-alert .close span
+{
+    line-height: 16px;
+    padding: 0;
+    margin: 0;
+    display: block;
+    top: 18px;
+    position: absolute;
+    right: 40px;
+}
+.s-w .group-radio
+{
+    margin-bottom: 10px;
+    text-align: left;
+}
+@media screen and (max-width: 767px)
+{
+    .s-w .s-h,
+    .s-w .group .description p,
+    .s-w .s-b .group,
+    .s-w .group .list
+    {
+        text-align: center;
+    }
+    .s-w .group label,
+    .s-w .group label,
+    .s-w input[type="submit"]
+    {
+        width: 100%;
+    }
+    .s-w .group input[type="checkbox"]
+    {
+        display: block;
+        margin: 22px auto 0;
+    }
+    .s-w .group,
+    .s-w .group
+    {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    body .alert.alert-warning.smsalert-alert
+    {
+        border-radius: 5px;
+        height: auto;
+        text-align: center;
+        line-height: 23px;
+    }
+    body .alert.alert-warning.smsalert-alert strong
+    {
+        border-radius: 5px;
+        width: 100%;
+        min-height: 55px;
+        line-height: 50px;
+        display: inline-table;
+    }
+    body .alert.alert-warning.smsalert-alert .close span {
+        top: 3px;
+        position: absolute;
+        right: 28px;
+    }
+}

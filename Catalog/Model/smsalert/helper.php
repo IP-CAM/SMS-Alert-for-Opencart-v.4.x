@@ -25,7 +25,7 @@ class SmsAlertHelper extends \Opencart\System\Engine\Model
         return false;
     }
 
-    protected function request($username, $apiKey, $phoneNumber, $message)
+    protected function request($username, $apiKey, $phoneNumber, $message): bool
     {
         // Create a new cURL resource
         $ch = curl_init(self::API_URL);

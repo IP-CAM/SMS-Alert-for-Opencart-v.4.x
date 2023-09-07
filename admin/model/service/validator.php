@@ -1,8 +1,8 @@
 <?php
 
-namespace Opencart\Admin\Model\Extension\SmsAlert\SmsAlert;
+namespace Opencart\Admin\Model\Extension\SmsAlert\Service;
 
-class SmsAlertValidator extends \Opencart\System\Engine\Model
+class Validator extends \Opencart\System\Engine\Model
 {
 
     /**

@@ -2,29 +2,29 @@
 
 namespace Opencart\Catalog\Controller\Extension\SmsAlert\Module;
 
-class SmsAlertModule extends \Opencart\System\Engine\Controller
+class SmsAlert extends \Opencart\System\Engine\Controller
 {
 
-    public function status_change($route, $data)
+    public function statusChange(string &$route, array &$data)
     {
         $orderStatusId = $data[1];
         $orderId       = $data[0];
 
         $this->load->model('setting/setting');
         $this->load->model('checkout/order');
-        $this->load->model('extension/smsalert/order');
-        $this->load->model('extension/smsalert/helper');
+        $this->load->model('extension/smsalert/service/order');
+        $this->load->model('extension/smsalert/service/helper');
 
         $order        = $this->model_checkout_order->getOrder($orderId);
-        $statusName   = $this->model_extension_smsalert_order->getStatusName($orderStatusId);
-        $isActive     = $this->model_setting_setting->getSettingValue("smsalert_active");
+        $isActive     = $this->model_setting_setting->getValue("smsalert_active");
+        $statusName   = $this->model_extension_smsalert_service_order->getStatusName($orderStatusId);
 
         if ($this->isModuleEnabled() && !empty($isActive) && !empty($statusName)) {
             $statusName     = str_replace(" ", "_", $statusName);
-            $statusActivate = $this->model_setting_setting->getSettingValue(
+            $statusActivate = $this->model_setting_setting->getValue(
                 "smsalert_" . strtolower($statusName) . "_active"
             );
-            $statusMessage  = $this->model_setting_setting->getSettingValue(
+            $statusMessage  = $this->model_setting_setting->getValue(
                 "smsalert_" . strtolower($statusName) . "_message"
             );
 
@@ -35,10 +35,10 @@ class SmsAlertModule extends \Opencart\System\Engine\Controller
                     '{order_total}'        => round(
                             $order['total'] * $order['currency_value'],
                             2
-                        ) . ' smsalert.php' .$order['currency_code'],
+                        ) . ' ' . $order['currency_code'],
                     '{billing_first_name}' => $order['payment_firstname'],
                     '{billing_last_name}'  => $order['payment_lastname'],
-                    '{shipping_method}'    => $order['shipping_method'],
+                    '{shipping_method}'    => $order['shipping_method']['name'],
                 ];
 
                 foreach ($replace as $key => $value) {
@@ -46,7 +46,7 @@ class SmsAlertModule extends \Opencart\System\Engine\Controller
                 }
 
                 try{
-                    $this->model_extension_smsalert_helper->sendSms($order['telephone'], $statusMessage);
+                    $this->model_extension_smsalert_service_helper->sendSms($order['telephone'], $statusMessage);
                 } catch (Exception $e) {
                     //
                 }

@@ -5,7 +5,7 @@ namespace Opencart\Admin\Controller\Extension\SmsAlert\Module;
 /**
  * Class SmsAlert
  */
-class SmsAlertModule extends \Opencart\System\Engine\Controller
+class SmsAlert extends \Opencart\System\Engine\Controller
 {
 
     private $error       = [];
@@ -76,23 +76,23 @@ class SmsAlertModule extends \Opencart\System\Engine\Controller
             exit;
         }
 
-        $this->load->language('extension/module/smsalert');
+        $this->load->language('extension/smsalert/module/smsalert');
 
         $this->document->setTitle($this->language->get('heading_title'));
-        $this->document->addStyle('/admin/view/stylesheet/smsalert/smsalert.css');
+        $this->document->addStyle('../extension/smsalert/admin/view/stylesheet/smsalert.css');
 
         $this->load->model('setting/setting');
         $this->load->model('setting/module');
         $this->load->model('design/layout');
-        $this->load->model('extension/smsalert/validator');
-        $this->load->model('extension/smsalert/helper');
+        $this->load->model('extension/smsalert/service/validator');
+        $this->load->model('extension/smsalert/service/helper');
 
         $this->submitted();
         $this->loadFieldsToData($data);
 
         $data['error_warning'] = $this->error;
 
-        $data['smsalert_logo'] = '/admin/view/image/smsalert/logo.png';
+        $data['smsalert_logo'] = '/extension/smsalert/admin/view/image/smsalert/logo.png';
 
         $data['heading_title'] = $this->language->get('heading_title');
         $data['text_edit']     = $this->language->get('text_edit');
@@ -129,7 +129,6 @@ class SmsAlertModule extends \Opencart\System\Engine\Controller
         $data['btn_status_order_shipped']           = $this->language->get('btn_status_order_shipped');
         $data['btn_status_order_voided']            = $this->language->get('btn_status_order_voided');
 
-        $data['order_status_list']    = $this->order_status_list;  // ??
         $data['smsalert_test_result'] = $this->testResult;
 
         # common template
@@ -137,7 +136,7 @@ class SmsAlertModule extends \Opencart\System\Engine\Controller
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer']      = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('extension/module/smsalert', $data));
+        $this->response->setOutput($this->load->view('extension/smsalert/settings/smsalert', $data));
     }
 
     public function isModuleEnabled()
@@ -165,11 +164,11 @@ class SmsAlertModule extends \Opencart\System\Engine\Controller
                 }
 
                 if (empty($this->error)) {
-                    $this->saveFiledsToDB();
+                    $this->saveFieldsToDB();
                     $fields = $this->getFieldsValue();
 
                     $message = 'Test opencart SMS message with SMSAlert.mobi';
-                    $result  = $this->model_extension_smsalert_helper->sendTestSMS(
+                    $result  = $this->model_extension_smsalert_service_helper->sendTestSMS(
                         $fields['smsalert_test_phone_number']['value'],
                         $message
                     );
@@ -182,7 +181,7 @@ class SmsAlertModule extends \Opencart\System\Engine\Controller
 
                 $this->validateFields();
                 if (empty($this->error)) {
-                    $this->saveFiledsToDB();
+                    $this->saveFieldsToDB();
                 }
             }
 
@@ -195,15 +194,15 @@ class SmsAlertModule extends \Opencart\System\Engine\Controller
     public function loadFieldsToData(&$data)
     {
         foreach ($this->fields as $key => $value) {
-            $data[$key] = $this->model_setting_setting->getSettingValue($key);
+            $data[$key] = $this->model_setting_setting->getValue($key);
         }
 
         foreach ($this->fields_test as $key => $value) {
-            $data[$key] = $this->model_setting_setting->getSettingValue($key);
+            $data[$key] = $this->model_setting_setting->getValue($key);
         }
     }
 
-    public function saveFiledsToDB()
+    public function saveFieldsToDB()
     {
         $fields = $this->getPostFiles();
 
@@ -235,7 +234,7 @@ class SmsAlertModule extends \Opencart\System\Engine\Controller
         foreach ($fields as $key => $value) {
             if (isset($value['validate'])) {
                 $result = call_user_func_array(
-                    [$this->model_extension_smsalert_validator, $value['type']],
+                    [$this->model_extension_smsalert_service_validator, $value['type']],
                     [$_POST[$key]]
                 );
                 if (!$result) {
@@ -250,7 +249,7 @@ class SmsAlertModule extends \Opencart\System\Engine\Controller
         $fields = $this->getPostFiles();
 
         foreach ($fields as $key => $value) {
-            $fields[$key]["value"] = $this->model_setting_setting->getSettingValue($key);
+            $fields[$key]["value"] = $this->model_setting_setting->getValue($key);
         }
 
         return $fields;
@@ -270,15 +269,18 @@ class SmsAlertModule extends \Opencart\System\Engine\Controller
     public function install()
     {
         $this->load->model('setting/event');
-        $this->model_setting_event->addEvent(
-            'smsalert',
-            'catalog/model/checkout/order/addOrderHistory/before',
-            'extension/module/smsalert/status_change'
-        );
+        $this->model_setting_event->addEvent([
+            'code' => 'smsalert_order_event',
+            'trigger' => 'catalog/model/checkout/order/addHistory/before',
+            'action' => 'extension/smsalert/module/smsalert.statusChange',
+            'description' => 'SMSAlert order status event',
+            'sort_order' => 1,
+            'status' => true
+        ]);
     }
 
     public function uninstall()
     {
-
+        $this->model_setting_event->deleteEventByCode('smsalert_order_event');
     }
 }

@@ -1,4 +1,4 @@
-<h2>SMSAlert Opencart 3.x</h2>
+<h2>SMSAlert Opencart 4.x</h2>
 
 <h3>Main functionalities</h3>
 

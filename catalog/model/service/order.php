@@ -1,8 +1,8 @@
 <?php
 
-namespace Opencart\Catalog\Model\Extension\SmsAlert\SmsAlert;
+namespace Opencart\Catalog\Model\Extension\SmsAlert\Service;
 
-class SmsAlertOrder extends \Opencart\System\Engine\Model
+class Order extends \Opencart\System\Engine\Model
 {
     /**
      * @param $statusId

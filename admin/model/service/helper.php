@@ -1,19 +1,19 @@
 <?php
 
-namespace Opencart\Admin\Model\Extension\SmsAlert\SmsAlert;
+namespace Opencart\Admin\Model\Extension\SmsAlert\Service;
 
 /**
  * Class ModelExtensionSmsAlertHelper
  */
-class SmsAlertHelper extends \Opencart\System\Engine\Model
+class Helper extends \Opencart\System\Engine\Model
 {
 
     public CONST API_URL = 'https://smsalert.mobi/api/v2/message/send';
 
     public function sendTestSMS($to, $body): bool
     {
-        $apiKey   = $this->model_setting_setting->getSettingValue('smsalert_apiKey');
-        $username = $this->model_setting_setting->getSettingValue('smsalert_username');
+        $apiKey   = $this->model_setting_setting->getValue('smsalert_apiKey');
+        $username = $this->model_setting_setting->getValue('smsalert_username');
 
         if (!empty($apiKey)) {
             try {
